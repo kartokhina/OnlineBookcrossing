@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "442041761140",
+    "project_id": "bookcrossing-98c81",
+    "storage_bucket": "bookcrossing-98c81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442041761140:android:02678120d674ef6d33c021",
+        "android_client_info": {
+          "package_name": "com.example.onlinebookcrossing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGtYBB62FtWXYeO4wSgl8DcqkEML0dkHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
