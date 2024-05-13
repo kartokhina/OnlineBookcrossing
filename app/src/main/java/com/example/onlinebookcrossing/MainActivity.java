@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
@@ -274,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 // Создание диалогового окна для изменения данных
+
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
                         .setTitle("Изменить").setView(view).setPositiveButton("Сохранить", new DialogInterface.OnClickListener() {
                             @Override
@@ -286,8 +288,6 @@ public class MainActivity extends AppCompatActivity {
                                     placeLayout.setError("Поле должно быть заполнено!");
                                 } else if (Objects.requireNonNull(contactET.getText()).toString().isEmpty()){
                                     contactLayout.setError("Поле должно быть заполнено!");
-                                } else if (imageUri == null) {
-                                    Toast.makeText(MainActivity.this, "Пожалуйста, выберите изображение", Toast.LENGTH_SHORT).show();
                                 } else {
                                     ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
                                     progressDialog.setMessage("Сохраняем...");
@@ -295,6 +295,23 @@ public class MainActivity extends AppCompatActivity {
                                     // Сначала загружаем изображение в Firebase Storage
                                     String imageName = "images/" + System.currentTimeMillis() + ".jpg";
                                     StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(imageName);
+
+                                    // Удаление старого изображения из Firebase Storage
+                                    if (book.getImageURL() != null) {
+                                        StorageReference oldImageRef = FirebaseStorage.getInstance().getReferenceFromUrl(book.getImageURL());
+                                        oldImageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                // Удаление выполнено успешно
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                // Ошибка при удалении старого изображения
+                                            }
+                                        });
+                                    }
+
                                     storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
