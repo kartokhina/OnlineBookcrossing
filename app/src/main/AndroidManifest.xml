@@ -16,10 +16,12 @@
             android:name=".LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.OnlineBookcrossing" />
+            android:theme="@style/Theme.OnlineBookcrossing"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +32,7 @@
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
           >
 <!--            android:theme="@style/MainTheme"-->
 
